@@ -8,16 +8,6 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace Survive_IF_You_Can
 {
-    // Оголосимо перерахування PlayerDirection
-    public enum PlayerDirection
-    {
-        None,
-        Up,
-        Down,
-        Left,
-        Right
-    }
-
     public partial class MainGameForm : Form
     {
         private List<IShooting> bullets = new List<IShooting>();
