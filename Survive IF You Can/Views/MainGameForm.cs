@@ -10,9 +10,19 @@ namespace Survive_IF_You_Can
 {
     public partial class MainGameForm : Form
     {
+        Random rand = new Random();
+        PauseForm pause = new PauseForm();
+        GameOverForm gameOverForm = new GameOverForm();
+        Ammo Ammo = new Ammo();
+        ZomboSpawn zomboSpawn = new ZomboSpawn();
+
         private List<IShooting> bullets = new List<IShooting>();
+        List<PictureBox> zomboList = new List<PictureBox>();
+
         private PlayerMovementController movementController;
         private PlayerDirection playerDirection;
+        private Timer zomboDeadTimer = new Timer();
+        private PictureBox deadZomboPictureBox;
 
         bool goup;
         bool godown;
@@ -28,17 +38,10 @@ namespace Survive_IF_You_Can
         bool isPaused = false;
         Timer pauseTimer;
 
-        Random rand = new Random();
-        List<PictureBox> zomboList = new List<PictureBox>();
-
         public void AddZombieToList(PictureBox zombie)
         {
             zomboList.Add(zombie);
         }
-
-        GameOverForm gameOverForm = new GameOverForm();
-        Ammo Ammo = new Ammo();
-        ZomboSpawn zomboSpawn = new ZomboSpawn();
 
         public MainGameForm()
         {
@@ -141,9 +144,6 @@ namespace Survive_IF_You_Can
                 }
             }
         }
-
-        private Timer zomboDeadTimer = new Timer();
-        private PictureBox deadZomboPictureBox;
 
         private void GameEngine(object sender, EventArgs e)
         {
@@ -256,14 +256,6 @@ namespace Survive_IF_You_Can
             this.Controls.Remove(deadZomboPictureBox);
         }
 
-        private void BringTopPanelToFront()
-        {
-            labelForAmmo.BringToFront();
-            labelForScore.BringToFront();
-            labelForHealth.BringToFront();
-            PBforHealth.BringToFront();
-        }
-
         private void RestartGame()
         {
             timer.Stop();
@@ -320,8 +312,6 @@ namespace Survive_IF_You_Can
                 PauseGame();
             }
         }
-
-        PauseForm pause = new PauseForm();
 
         private void PauseGame()
         {
