@@ -41,7 +41,14 @@ namespace Survive_IF_You_Can
         Random rand = new Random();
         List<PictureBox> zomboList = new List<PictureBox>();
 
+        public void AddZombieToList(PictureBox zombie)
+        {
+            zomboList.Add(zombie);
+        }
+
         GameOverForm gameOverForm = new GameOverForm();
+        Ammo Ammo = new Ammo();
+        ZomboSpawn zomboSpawn = new ZomboSpawn();
 
         public MainGameForm()
         {
@@ -60,7 +67,7 @@ namespace Survive_IF_You_Can
                 bullet.Shoot();
 
                 if (ammo < 1)
-                    DropAmmo();
+                    Ammo.DropAmmo(this);
             }
         }
 
@@ -239,7 +246,8 @@ namespace Survive_IF_You_Can
                             ((PictureBox)controlX).Dispose();
 
                             zomboList.Remove((PictureBox)controlJ);
-                            MakeZombo();
+                            zomboSpawn.MakeZombo(this);
+                            Player.BringToFront();
                         }
                     }
                 }
@@ -256,32 +264,6 @@ namespace Survive_IF_You_Can
         {
             zomboDeadTimer.Stop();
             this.Controls.Remove(deadZomboPictureBox);
-        }
-
-        private void DropAmmo()
-        {
-            PictureBox ammo = new PictureBox();
-            ammo.Tag = "ammo";
-            ammo.Image = Properties.Resources.ammoIMG;
-            ammo.SizeMode = PictureBoxSizeMode.AutoSize;
-            ammo.Left = rand.Next(10, this.ClientSize.Width - ammo.Width);
-            ammo.Top = rand.Next(50, this.ClientSize.Height - ammo.Height);
-            this.Controls.Add(ammo);
-
-            ammo.BringToFront();
-        }
-
-        private void MakeZombo()
-        {
-            PictureBox zombo = new PictureBox();
-            zombo.Tag = "zombo1";
-            zombo.Image = Properties.Resources.ZombieLEFT;
-            zombo.Left = rand.Next(0, 1200);
-            zombo.Top = rand.Next(0, 780);
-            zombo.SizeMode = PictureBoxSizeMode.AutoSize;
-            zomboList.Add(zombo);
-            this.Controls.Add(zombo);
-            Player.BringToFront();
         }
 
         private void BringTopPanelToFront()
@@ -310,7 +292,8 @@ namespace Survive_IF_You_Can
 
             for (int zomb = 0; zomb < 3; zomb++)
             {
-                MakeZombo();
+                zomboSpawn.MakeZombo(this);
+                Player.BringToFront();
             }
 
             goup = false;
