@@ -28,114 +28,134 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MouseDown += new MouseEventHandler(MainGameForm_MouseDown);
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainGameForm));
-            this.Player = new System.Windows.Forms.PictureBox();
-            this.labelForAmmo = new System.Windows.Forms.Label();
-            this.labelForScore = new System.Windows.Forms.Label();
-            this.labelForHealth = new System.Windows.Forms.Label();
-            this.PBforHealth = new System.Windows.Forms.ProgressBar();
-            this.timer = new System.Windows.Forms.Timer(this.components);
-            this.pauseLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.Player)).BeginInit();
-            this.SuspendLayout();
+            Player = new PictureBox();
+            labelForAmmo = new Label();
+            labelForScore = new Label();
+            labelForHealth = new Label();
+            PBforHealth = new ProgressBar();
+            timer = new System.Windows.Forms.Timer(components);
+            pauseLabel = new Label();
+            levelLbl = new Label();
+            ((System.ComponentModel.ISupportInitialize)Player).BeginInit();
+            SuspendLayout();
             // 
             // Player
             // 
-            this.Player.Image = global::Survive_IF_You_Can.Properties.Resources.BayraktarUP;
-            this.Player.Location = new System.Drawing.Point(457, 573);
-            this.Player.Name = "Player";
-            this.Player.Size = new System.Drawing.Size(177, 95);
-            this.Player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.Player.TabIndex = 0;
-            this.Player.TabStop = false;
-            this.Player.Tag = "player";
+            Player.Image = Properties.Resources.BayraktarUP;
+            Player.Location = new Point(653, 955);
+            Player.Margin = new Padding(4, 5, 4, 5);
+            Player.Name = "Player";
+            Player.Size = new Size(177, 95);
+            Player.SizeMode = PictureBoxSizeMode.AutoSize;
+            Player.TabIndex = 0;
+            Player.TabStop = false;
+            Player.Tag = "player";
             // 
             // labelForAmmo
             // 
-            this.labelForAmmo.AutoSize = true;
-            this.labelForAmmo.Font = new System.Drawing.Font("Cascadia Mono", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelForAmmo.ForeColor = System.Drawing.Color.White;
-            this.labelForAmmo.Location = new System.Drawing.Point(12, 9);
-            this.labelForAmmo.Name = "labelForAmmo";
-            this.labelForAmmo.Size = new System.Drawing.Size(96, 28);
-            this.labelForAmmo.TabIndex = 2;
-            this.labelForAmmo.Text = "Ammo: 0";
+            labelForAmmo.AutoSize = true;
+            labelForAmmo.Font = new Font("Cascadia Mono", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelForAmmo.ForeColor = Color.White;
+            labelForAmmo.Location = new Point(17, 15);
+            labelForAmmo.Margin = new Padding(4, 0, 4, 0);
+            labelForAmmo.Name = "labelForAmmo";
+            labelForAmmo.Size = new Size(152, 43);
+            labelForAmmo.TabIndex = 2;
+            labelForAmmo.Text = "Ammo: 0";
             // 
             // labelForScore
             // 
-            this.labelForScore.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelForScore.AutoSize = true;
-            this.labelForScore.Font = new System.Drawing.Font("Cascadia Mono", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelForScore.ForeColor = System.Drawing.Color.White;
-            this.labelForScore.Location = new System.Drawing.Point(398, 9);
-            this.labelForScore.Name = "labelForScore";
-            this.labelForScore.Size = new System.Drawing.Size(108, 28);
-            this.labelForScore.TabIndex = 3;
-            this.labelForScore.Text = "Score: 0";
+            labelForScore.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            labelForScore.AutoSize = true;
+            labelForScore.Font = new Font("Cascadia Mono", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelForScore.ForeColor = Color.White;
+            labelForScore.Location = new Point(569, 15);
+            labelForScore.Margin = new Padding(4, 0, 4, 0);
+            labelForScore.Name = "labelForScore";
+            labelForScore.Size = new Size(171, 43);
+            labelForScore.TabIndex = 3;
+            labelForScore.Text = "Score: 0";
             // 
             // labelForHealth
             // 
-            this.labelForHealth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelForHealth.AutoSize = true;
-            this.labelForHealth.Font = new System.Drawing.Font("Cascadia Mono", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelForHealth.ForeColor = System.Drawing.Color.White;
-            this.labelForHealth.Location = new System.Drawing.Point(785, 9);
-            this.labelForHealth.Name = "labelForHealth";
-            this.labelForHealth.Size = new System.Drawing.Size(108, 28);
-            this.labelForHealth.TabIndex = 4;
-            this.labelForHealth.Text = "Health: ";
+            labelForHealth.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelForHealth.AutoSize = true;
+            labelForHealth.Font = new Font("Cascadia Mono", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelForHealth.ForeColor = Color.White;
+            labelForHealth.Location = new Point(1121, 15);
+            labelForHealth.Margin = new Padding(4, 0, 4, 0);
+            labelForHealth.Name = "labelForHealth";
+            labelForHealth.Size = new Size(171, 43);
+            labelForHealth.TabIndex = 4;
+            labelForHealth.Text = "Health: ";
             // 
             // PBforHealth
             // 
-            this.PBforHealth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.PBforHealth.Location = new System.Drawing.Point(885, 14);
-            this.PBforHealth.Name = "PBforHealth";
-            this.PBforHealth.Size = new System.Drawing.Size(237, 23);
-            this.PBforHealth.TabIndex = 5;
+            PBforHealth.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            PBforHealth.Location = new Point(1264, 23);
+            PBforHealth.Margin = new Padding(4, 5, 4, 5);
+            PBforHealth.Name = "PBforHealth";
+            PBforHealth.Size = new Size(339, 38);
+            PBforHealth.TabIndex = 5;
             // 
             // timer
             // 
-            this.timer.Enabled = true;
-            this.timer.Interval = 20;
-            this.timer.Tick += new System.EventHandler(this.GameEngine);
+            timer.Enabled = true;
+            timer.Interval = 20;
+            timer.Tick += GameEngine;
             // 
             // pauseLabel
             // 
-            this.pauseLabel.AutoSize = true;
-            this.pauseLabel.Location = new System.Drawing.Point(491, 341);
-            this.pauseLabel.Name = "pauseLabel";
-            this.pauseLabel.Size = new System.Drawing.Size(0, 15);
-            this.pauseLabel.TabIndex = 6;
+            pauseLabel.AutoSize = true;
+            pauseLabel.Location = new Point(701, 568);
+            pauseLabel.Margin = new Padding(4, 0, 4, 0);
+            pauseLabel.Name = "pauseLabel";
+            pauseLabel.Size = new Size(0, 25);
+            pauseLabel.TabIndex = 6;
+            // 
+            // levelLbl
+            // 
+            levelLbl.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            levelLbl.AutoSize = true;
+            levelLbl.Font = new Font("Cascadia Mono", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            levelLbl.ForeColor = Color.White;
+            levelLbl.Location = new Point(306, 15);
+            levelLbl.Margin = new Padding(4, 0, 4, 0);
+            levelLbl.Name = "levelLbl";
+            levelLbl.Size = new Size(171, 43);
+            levelLbl.TabIndex = 7;
+            levelLbl.Text = "Level: 1";
             // 
             // MainGameForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightBlue;
-            this.ClientSize = new System.Drawing.Size(1134, 741);
-            this.Controls.Add(this.pauseLabel);
-            this.Controls.Add(this.PBforHealth);
-            this.Controls.Add(this.labelForHealth);
-            this.Controls.Add(this.labelForScore);
-            this.Controls.Add(this.labelForAmmo);
-            this.Controls.Add(this.Player);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1150, 780);
-            this.Name = "MainGameForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Survive If You Can";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainGameForm_FormClosing);
-            this.Load += new System.EventHandler(this.MainGameForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyIsDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyIsUp);
-            ((System.ComponentModel.ISupportInitialize)(this.Player)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.LightBlue;
+            ClientSize = new Size(1620, 1235);
+            Controls.Add(levelLbl);
+            Controls.Add(pauseLabel);
+            Controls.Add(PBforHealth);
+            Controls.Add(labelForHealth);
+            Controls.Add(labelForScore);
+            Controls.Add(labelForAmmo);
+            Controls.Add(Player);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 5, 4, 5);
+            MinimumSize = new Size(1633, 1263);
+            Name = "MainGameForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Survive If You Can";
+            FormClosing += MainGameForm_FormClosing;
+            Load += MainGameForm_Load;
+            KeyDown += keyIsDown;
+            KeyUp += keyIsUp;
+            MouseDown += MainGameForm_MouseDown;
+            ((System.ComponentModel.ISupportInitialize)Player).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -147,5 +167,6 @@
         private ProgressBar PBforHealth;
         private System.Windows.Forms.Timer timer;
         private Label pauseLabel;
+        private Label levelLbl;
     }
 }

@@ -1,12 +1,6 @@
-using Microsoft.VisualBasic.Devices;
 using Survive_IF_You_Can.Enemies;
 using Survive_IF_You_Can.Player;
-using Survive_IF_You_Can.Properties;
 using Survive_IF_You_Can.Shooting;
-using System.ComponentModel;
-using System.Numerics;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Cryptography.Xml;
 using Timer = System.Windows.Forms.Timer;
 
 namespace Survive_IF_You_Can
@@ -27,6 +21,7 @@ namespace Survive_IF_You_Can
         private Timer zomboDeadTimer = new Timer();
         private PictureBox deadZomboPictureBox;
 
+        private int _zombieAmount = 3;
         bool goup;
         bool godown;
         bool goleft;
@@ -172,6 +167,7 @@ namespace Survive_IF_You_Can
             labelForAmmo.Text = "Снарядів: " + ammo;
             labelForScore.Text = "Рахунок: " + kills;
 
+            ChangeLevel(kills);
             UpdatePlayerMovement();
 
             foreach (Control controlX in this.Controls)
@@ -275,7 +271,7 @@ namespace Survive_IF_You_Can
 
             zomboList.Clear();
 
-            for (int zomb = 0; zomb < 3; zomb++)
+            for (int zomb = 0; zomb < _zombieAmount; zomb++)
             {
                 zomboSpawn.MakeZombo(this);
                 Player.BringToFront();
@@ -420,6 +416,25 @@ namespace Survive_IF_You_Can
         private void ResetPlayerDirection()
         {
             playerDirection = PlayerDirection.None;
+        }
+
+        private void ChangeLevel(int kills)
+        {
+            int newLevel = kills / 10 + 1;
+            int oldLevel = Convert.ToInt32(levelLbl.Text.Split(' ')[1]);
+
+            if (newLevel > oldLevel)
+            {
+                levelLbl.Text = "Level: " + newLevel;
+                zomboSpeed++;
+                playerHealth = 100;
+
+                if (newLevel % 3 == 0)
+                    playerSpeed++;
+
+                if (newLevel % 5 == 0)
+                    _zombieAmount++;
+            }
         }
     }
 }
