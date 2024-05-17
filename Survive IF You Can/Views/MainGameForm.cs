@@ -1,5 +1,8 @@
 using Microsoft.VisualBasic.Devices;
+using Survive_IF_You_Can.Enemies;
+using Survive_IF_You_Can.Player;
 using Survive_IF_You_Can.Properties;
+using Survive_IF_You_Can.Shooting;
 using System.ComponentModel;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;

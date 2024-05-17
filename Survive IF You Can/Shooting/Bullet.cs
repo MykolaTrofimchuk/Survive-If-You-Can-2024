@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.Timers;
 using Timer = System.Windows.Forms.Timer;
 
-namespace Survive_IF_You_Can
+namespace Survive_IF_You_Can.Shooting
 {
     internal class Bullet : IShooting
     {

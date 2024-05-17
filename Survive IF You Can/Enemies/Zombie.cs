@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
-namespace Survive_IF_You_Can
+namespace Survive_IF_You_Can.Enemies
 {
     public class Zombie
     {
