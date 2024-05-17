@@ -7,7 +7,16 @@ lab-6 KPZ by Trofimchuk Mykola IPZ-22-2 || (Game Survive If You Can)
 
 # Survive IF You Can
 
-Survive IF You Can is a Windows Forms game where the player must survive waves of zombies by shooting them and collecting ammo. The player can move in four directions, shoot bullets, and encounter zombies. The game features a pause functionality and keeps track of the player's score and health.
+Survive IF You Can is a Windows Forms 2D game where the player must survive waves of zombies by shooting them and collecting ammo. The player can move in four directions, shoot bullets, and encounter zombies. The game features a pause functionality and keeps track of the player's score and health.
+
+## Features
+
+- Player movement in four directions (up, down, left, right).
+- Shooting bullets in the direction the player is facing.
+- Zombies that spawn and move towards the player.
+- Collision detection between bullets and zombies.
+- Score tracking based on the number of zombies killed.
+- Pausing and resuming the game.
 
 ## Programming Principles
 
@@ -18,6 +27,8 @@ In developing this game, several core programming principles were followed to en
 3. **Liskov Substitution Principle (LSP)**: Objects of a superclass should be replaceable with objects of a subclass without affecting the functionality. This principle is adhered to by using interfaces such as `IShooting` and implementing them in classes like `Bullet`.
 4. **Interface Segregation Principle (ISP)**: Many client-specific interfaces are better than one general-purpose interface. This principle is reflected in the separation of concerns between interfaces and their implementations, such as the `IShooting` interface.
 5. **Dependency Inversion Principle (DIP)**: High-level modules should not depend on low-level modules; both should depend on abstractions. For example, the `ShootingFactory` depends on the `IShooting` interface, not on the concrete `Bullet` class.
+6. **Encapsulation**: Class fields are made private or protected, and access to them is provided through public methods. This helps to hide implementation details and reduce the likelihood of errors.
+7. **DRY (Don't Repeat Yourself)**: The code is organized to avoid duplication. For example, the methods for player and zombie movement are clearly separated and do not duplicate each other.
 
 ## Design Patterns
 
@@ -29,6 +40,7 @@ Several design patterns were applied in the development of this game:
     - **File**: [Ammo.cs](./Survive_IF_You_Can/Ammo.cs), [ZomboSpawn.cs](./Survive_IF_You_Can/ZomboSpawn.cs)
 3. **Observer Pattern**: The game uses a custom `Timer` to control the game loop and updates the game state, which is similar to the observer pattern where the timer notifies the game to update its state.
     - **File**: [MainGameForm.cs](./Survive-IF-You-Can/Views/MainGameForm.cs)
+4. **Strategy**: Using the IShooting interface and its implementations for different shooting types allows changing the shooting behavior depending on the situation.
 
 ## Refactoring Techniques
 
