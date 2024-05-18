@@ -1,72 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+﻿using Survive_IF_You_Can.Constants;
+using Survive_IF_You_Can.General_object;
 
-namespace Survive_IF_You_Can.Enemies
+namespace Survive_IF_You_Can.Enemies;
+
+public class Zombie : GameObject, IEnemy
 {
-    public class Zombie
+    public Zombie(MainGameForm gameForm, Point startPosition)
     {
-        private PictureBox zombiePictureBox;
-        private MainGameForm gameForm;
-        private int zombieSpeed = 1;
-
-        public PictureBox PictureBox => zombiePictureBox; // Властивість для доступу до PictureBox
-
-        public Point PlayerPosition { get; set; }
-        public bool IsHit { get; set; }
-
-        private PictureBox pictureBox;
-        private Point startPosition;
-
-        public Zombie(MainGameForm gameForm, PictureBox pictureBox, Point startPosition)
-        {
-            this.gameForm = gameForm;
-            this.pictureBox = pictureBox;
-            this.startPosition = startPosition;
-
-            // Ініціалізуємо PictureBox і додаємо його до форми
-            zombiePictureBox = new PictureBox();
-            InitializeZombie(startPosition);
-            gameForm.Controls.Add(zombiePictureBox);
-        }
-
-        private void InitializeZombie(Point location)
-        {
-            zombiePictureBox.Image = Properties.Resources.ZombieLEFT;
-            zombiePictureBox.Size = new Size(50, 50); // Розмір зображення зомбі
-            zombiePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            zombiePictureBox.Tag = "zombie";
-            zombiePictureBox.Location = location; // Початкова позиція зомбі
-            zombiePictureBox.BringToFront(); // Перемістимо на передній план
-        }
-
-        public void MoveTowardsPlayer(Point playerLocation)
-        {
-            if (zombiePictureBox != null && zombiePictureBox.Left > playerLocation.X)
-            {
-                zombiePictureBox.Left -= zombieSpeed;
-                zombiePictureBox.Image = Properties.Resources.ZombieLEFT;
-            }
-            else if (zombiePictureBox != null && zombiePictureBox.Left < playerLocation.X)
-            {
-                zombiePictureBox.Left += zombieSpeed;
-                zombiePictureBox.Image = Properties.Resources.ZombieRight;
-            }
-
-            if (zombiePictureBox != null && zombiePictureBox.Top > playerLocation.Y)
-            {
-                zombiePictureBox.Top -= zombieSpeed;
-                zombiePictureBox.Image = Properties.Resources.ZombieUP;
-            }
-            else if (zombiePictureBox != null && zombiePictureBox.Top < playerLocation.Y)
-            {
-                zombiePictureBox.Top += zombieSpeed;
-                zombiePictureBox.Image = Properties.Resources.ZombieDOWN;
-            }
-        }
+        Initialize(Properties.Resources.ZombieLEFT, new Size(GameConstants.ZombieSizeWidth, GameConstants.ZombieSizeHeight), startPosition);
+        gameForm.Controls.Add(pictureBox);
     }
 
+    public void MoveTowardsPlayer(Point playerLocation)
+    {
+        int speed = GameConstants.ZombieSpeed;
+        var moveX = (int x) => Position = new Point(x, Position.Y);
+        var moveY = (int y) => Position = new Point(Position.X, y);
+
+        if (Position.X > playerLocation.X)
+        {
+            moveX(Position.X - speed);
+            pictureBox.Image = Properties.Resources.ZombieLEFT;
+        }
+        else if (Position.X < playerLocation.X)
+        {
+            moveX(Position.X + speed);
+            pictureBox.Image = Properties.Resources.ZombieRight;
+        }
+
+        if (Position.Y > playerLocation.Y)
+        {
+            moveY(Position.Y - speed);
+            pictureBox.Image = Properties.Resources.ZombieUP;
+        }
+        else if (Position.Y < playerLocation.Y)
+        {
+            moveY(Position.Y + speed);
+            pictureBox.Image = Properties.Resources.ZombieDOWN;
+        }
+    }
 }
