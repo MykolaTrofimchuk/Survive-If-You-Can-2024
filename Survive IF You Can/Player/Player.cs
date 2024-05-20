@@ -1,59 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Survive_IF_You_Can.Constants;
+using Survive_IF_You_Can.General_object;
 
-namespace Survive_IF_You_Can.Player
+namespace Survive_IF_You_Can.Player;
+
+public class Player : GameObject, IGameCharacter
 {
-    public class Player
+    private MainGameForm gameForm;
+    public Player(MainGameForm gameForm)
     {
-        private PictureBox playerPictureBox;
-        private MainGameForm gameForm;
-        private PlayerDirection playerDirection;
-        private int playerSpeed = 7;
+        this.gameForm = gameForm;
+        Initialize(Properties.Resources.BayraktarUP, new Size(GameConstants.AmmoSizeWidth, GameConstants.AmmoSizeHeight), new Point(100, 100));
+        gameForm.Controls.Add(pictureBox);
+    }
 
-        public Player(MainGameForm gameForm)
+    public void Move(PlayerDirection direction)
+    {
+        int speed = GameConstants.PlayerSpeed;
+        switch (direction)
         {
-            this.gameForm = gameForm;
-            InitializePlayer();
-        }
-
-        private void InitializePlayer()
-        {
-            playerPictureBox = new PictureBox();
-            playerPictureBox.Image = Properties.Resources.BayraktarUP;
-            playerPictureBox.Size = new Size(50, 50); // Розмір зображення гравця
-            playerPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            playerPictureBox.Tag = "player";
-            playerPictureBox.Location = new Point(100, 100); // Початкова позиція гравця
-            gameForm.Controls.Add(playerPictureBox);
-            playerPictureBox.BringToFront();
-        }
-
-        public void Move(PlayerDirection direction)
-        {
-            switch (direction)
-            {
-                case PlayerDirection.Up:
-                    if (playerPictureBox.Top > 0)
-                        playerPictureBox.Top -= playerSpeed;
-                    break;
-                case PlayerDirection.Down:
-                    if (playerPictureBox.Top + playerPictureBox.Height < gameForm.ClientSize.Height)
-                        playerPictureBox.Top += playerSpeed;
-                    break;
-                case PlayerDirection.Left:
-                    if (playerPictureBox.Left > 0)
-                        playerPictureBox.Left -= playerSpeed;
-                    break;
-                case PlayerDirection.Right:
-                    if (playerPictureBox.Left + playerPictureBox.Width < gameForm.ClientSize.Width)
-                        playerPictureBox.Left += playerSpeed;
-                    break;
-                default:
-                    break;
-            }
+            case PlayerDirection.Up:
+                if (Position.Y > 0)
+                    Position = new Point(Position.X, Position.Y - speed);
+                break;
+            case PlayerDirection.Down:
+                if (Position.Y + pictureBox.Height < gameForm.ClientSize.Height)
+                    Position = new Point(Position.X, Position.Y + speed);
+                break;
+            case PlayerDirection.Left:
+                if (Position.X > 0)
+                    Position = new Point(Position.X - speed, Position.Y);
+                break;
+            case PlayerDirection.Right:
+                if (Position.X + pictureBox.Width < gameForm.ClientSize.Width)
+                    Position = new Point(Position.X + speed, Position.Y);
+                break;
         }
     }
 }
